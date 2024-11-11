@@ -123,7 +123,7 @@ class CryptoInsight:
     def display_cryptos(self):
 
         if not self.crypto_data:
-            print("no data available. please fetch data first")
+            print("no data available. please fetch data first.")
             return
 
         for coin in self.crypto_data:
