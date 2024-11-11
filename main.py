@@ -1,5 +1,5 @@
 from API import CryptoAPI
-
+import os
 
 
 class wallet:
@@ -137,7 +137,8 @@ class CryptoInsight:
 
 
 if __name__ == "__main__":
-    api_key = "c962eca3-8f3a-48e3-861d-12eb2e95c06c"
+    CMC_key = os.getenv('CMC_key')
+    api_key = CMC_key
     crypto_insight = CryptoInsight(api_key=api_key, limit= 10)
     crypto_insight.update_crypto_data()
     crypto_insight.display_cryptos()
