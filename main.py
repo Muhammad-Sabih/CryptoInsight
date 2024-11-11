@@ -1,3 +1,7 @@
+from API import CryptoAPI
+
+
+
 class wallet:
     def __init__(self, user_id, api_key):
         self.user_id = user_id
@@ -25,23 +29,23 @@ class Transaction:
     def display_transaction(self):
         pass
 
-class cryptoAPI:
-    def __init__(self):
-        self.base_url: 'https://api.coingecko.com/api/v3/'
+#class cryptoAPI:
+#    def __init__(self):
+#       self.base_url: 'https://api.coingecko.com/api/v3/'
 
-    def get_coin_data(self, coin_id):
-        pass
+#    def get_coin_data(self, coin_id):
+#        pass
 
-    def get_market_trends(self):
-        pass
+#    def get_market_trends(self):
+#        pass
 
-    def get_historical_data(self, coin_id, days):
-        pass
+#    def get_historical_data(self, coin_id, days):
+#        pass
 
 class RecommendationEngine:
-    def __init__(self, wallet_data, marlet_data):
+    def __init__(self, wallet_data, market_data):
         self.wallet_data = wallet_data
-        self.market_data = marlet_data
+        self.market_data = market_data
 
     def calculate_average_holding(self):
         pass
@@ -103,4 +107,37 @@ class Database:
         def get_user_input(self):
             pass
 
+class CryptoInsight:
+    def __init__(self, api_key, limit=10):
+        self.limit = limit
+        self.crypto_data = []
+        self.api = CryptoAPI(api_key)
 
+    def update_crypto_data(self):
+        self.crypto_data = self.api.fetch_crypto_data(limit=self.limit)
+        if self.crypto_data:
+            print("Data successfully fetched and updated.")
+        else:
+            print("Failed to fetch data.")
+
+    def display_cryptos(self):
+
+        if not self.crypto_data:
+            print("no data available. please fetch data first")
+            return
+
+        for coin in self.crypto_data:
+            name = coin['name']
+            symbol = coin['symbol']
+            price = coin['quote']['USD']['market_cap']
+            market_cap = coin['quote']['USD']['market_cap']
+            print(f"Name {name}, Symbol: {symbol}, Price: ${price:.2f}, Market Cap: ${market_cap:.2f} ")
+
+
+
+
+if __name__ == "__main__":
+    api_key = "c962eca3-8f3a-48e3-861d-12eb2e95c06c"
+    crypto_insight = CryptoInsight(api_key=api_key, limit= 10)
+    crypto_insight.update_crypto_data()
+    crypto_insight.display_cryptos()
