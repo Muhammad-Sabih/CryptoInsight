@@ -66,3 +66,7 @@ class CryptoAPI:
     except (ConnectionError, Timeout, TooManyRedirects) as e:
       print(f"Error fetching data: {e}")
       return None
+
+
+
+
